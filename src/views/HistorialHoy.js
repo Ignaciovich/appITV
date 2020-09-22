@@ -23,7 +23,7 @@ export default class HistorialHoy extends Component {
         const cita = {
             "fecha": fecha,
         }
-
+        console.log(fecha);
         fetch("http://"+constantes.ip+":8080/itvApp/getCitaByFecha", {
             method: "POST",
             headers: {

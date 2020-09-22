@@ -9,6 +9,8 @@ import {
     Dimensions,
 } from 'react-native';
 import HR from './HR';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {getColors as AppColors} from '../styles/colors';
 
 const CitasList = ({citas, onPressItem}) => {
     
@@ -17,6 +19,9 @@ const CitasList = ({citas, onPressItem}) => {
             {citas.map((cita) => (
                 <View style={styles.stack} key={cita.id}>
                     <TouchableOpacity onPress={() => onPressItem(cita)} style={styles.button}>
+                        <View style={styles.img_container}>
+                            <Ionicons name="ios-calendar" size={80} color={AppColors.backgrounLogin} />   
+                        </View>
                         <View>
                             <View style={styles.text_container}>
                                 <Text style={styles.text_title}>Fecha: </Text>
@@ -29,11 +34,8 @@ const CitasList = ({citas, onPressItem}) => {
                             <View style={styles.text_container}>
                                 <Text style={styles.text_title}>Matrícula: </Text>
                                 <Text>{cita.matricula}</Text>
-                            </View>
-                        </View>                        
-                        <View style={styles.img_container}>
-                            <Image style={styles.img} source={require('../../assets/icons8-info-48.png')}/>   
-                        </View>
+                            </View>   
+                        </View> 
                     </TouchableOpacity>
                     <HR/>
                 </View>
@@ -64,12 +66,7 @@ const styles = StyleSheet.create({
         height: 80,
         width: 80,
         marginTop: -8,
-        marginLeft: '45%',
     },
-    img:{
-        flex: 1,
-        resizeMode: "contain",
-    }
 });
 
 export default CitasList;

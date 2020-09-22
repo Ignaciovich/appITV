@@ -159,12 +159,12 @@ export default class CrearCita extends Component {
         <Text style={{color:"#FFF"}}>Correo usuario:</Text>
         <TextInput style={styles.input} keyboardType="email-address" onChangeText= {(value) => this.setState({email: value})}></TextInput>
         <Text style={{color:"#FFF"}}>Matrícula vehículo:</Text>
-        <TextInput style={styles.input} onChangeText= {(value) => this.setState({matricula: value})} placeholderTextColor= {AppColors.inputPlaceHolder} placeholder="Ej. AAAA 000"></TextInput>
+        <TextInput autoCapitalize="characters" style={styles.input} onChangeText= {(value) => this.setState({matricula: value})} placeholderTextColor= {AppColors.inputPlaceHolder} placeholder="Ej. 0000 AAA"></TextInput>
         <Text style={{color:"#FFF"}}>Estación:</Text>
         <TextInput style={styles.input} onChangeText= {(value) => this.setState({estacion: value})}></TextInput>
         <Text style={{color:"#FFF"}}>Fecha:</Text>
         <View style={styles.view_horizontal}>
-          <View style={{...styles.view_contorno, width: "45%"}}>
+          <View style={{...styles.input, width: "34%"}}>
             <Picker selectedValue={this.state.mes} onValueChange={(itemValue, itemIndex) => {this.checkMes(itemValue)}}>
               {
                 this.state.meses.map((mes) => {
@@ -176,7 +176,7 @@ export default class CrearCita extends Component {
               }
             </Picker>
           </View>
-          <View style={{...styles.view_contorno, width: "22%", marginLeft: 5}}>
+          <View style={{...styles.input, width: "29%", marginLeft: 5, }}>
             <Picker selectedValue={this.state.dia} onValueChange={(itemValue, itemIndex) => {this.setState({dia: itemValue})}}>
               {
                 this.state.dias.map((dia) => {
@@ -187,7 +187,7 @@ export default class CrearCita extends Component {
               }
             </Picker>
           </View>
-          <View style={{...styles.view_contorno, width: "30%", marginLeft: 5}}>
+          <View style={{...styles.input, width: "34%", marginLeft: 5}}>
             <Picker selectedValue={this.state.año} onValueChange={(itemValue, itemIndex) => {this.checkAño(itemValue)}}>
               <Picker.Item label={this.state.añoActual+""} value={this.state.añoActual} key={this.state.añoActual}/>
               <Picker.Item label={this.state.añoActual+1+""}  value={this.state.añoActual+1} key={this.state.añoActual+1}/>
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: AppColors.backgrounLogin,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     justifyContent: 'center',
   },
   input: {
@@ -218,12 +218,13 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingHorizontal: 10,
     borderRadius: 5,
+    justifyContent: "center",
   },
   buttonContainer: {
       backgroundColor: AppColors.buttonLogin,
-      paddingVertical: 12,
-      marginBottom: 10,
+      height: 40,
       borderRadius: 5,
+      justifyContent: "center",
   },
   buttonText: {
     textAlign: "center",

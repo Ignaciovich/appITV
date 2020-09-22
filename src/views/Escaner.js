@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import {getColors as AppColors} from '../styles/colors';
+import {constantes} from '../data/constantes';
 
 import {BarCodeScanner} from 'expo-barcode-scanner';
 
@@ -34,7 +35,21 @@ export default class Escaner extends React.Component{
 
   handleBarCodeScanned = ({type, data}) => {
     this.setState({scanned: true});
-    this.props.navigation.navigate('Informe', {"operario": this.state.operario, "cita": data});
+
+    fetch("http://"+constantes.ip+":8080/itvApp/getCitaById", {
+      method: "POST",
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      }, 
+      body:  JSON.stringify(data),
+    }).then(function(response){  
+        return response.json();   
+    }).then(data => { 
+        if (data.id){
+          this.props.navigation.navigate('Informe', {"operario": this.state.operario, "cita": data});
+        }
+    });
   };
 
   render(){
@@ -56,7 +71,7 @@ export default class Escaner extends React.Component{
         {
           scanned && ( 
             <TouchableOpacity style={sytles.buttonContainer} onPress = {() => this.setState({scanned: false})}>
-              <Text style={sytles.buttonText}>Pulsa para volver a escanear</Text>
+              <Text style={sytles.buttonText}>Pulsa para volver a escanear.</Text>
             </TouchableOpacity>
           )
         } 

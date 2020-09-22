@@ -107,8 +107,8 @@ export default class DatosCita extends Component {
             return (
                 <View>
                     <Text style={styles.subtitle}>Operario al cargo:</Text>
-                    <View>
-                        <Text>{this.state.operario.nombre}</Text>
+                    <View style={styles.view_contorno}>
+                        <Text style={styles.text}>{this.state.operario.nombre}</Text>
                     </View>
                     <Text style={styles.subtitle}>Observaciónes del operario:</Text>
                     <View style={styles.view_contorno}>
@@ -175,7 +175,7 @@ export default class DatosCita extends Component {
 const styles = StyleSheet.create({
 container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: AppColors.backgrounLogin,
     justifyContent: 'center',
 },
 subcontainer: {
@@ -189,28 +189,32 @@ title: {
     fontWeight: "bold",
     fontSize: 18,
     marginBottom: 10,
+    color: AppColors.white,
 },
 subtitle: {
     fontWeight: "bold",
     marginBottom: 5,
+    color: AppColors.white,
 },
 buttonContainer: {
     backgroundColor: AppColors.buttonLogin,
-    paddingVertical: 15,
-    marginTop: 20,
     borderRadius: 5,
-    height: 50,
+    height: 40,
+    justifyContent: "center",
 },
 buttonText: {   
     textAlign: "center",
     color: AppColors.white,
 },
 view_contorno:{
-    backgroundColor: "#d9d9d9",
+    backgroundColor: AppColors.inputLogin,
     marginBottom: 10,
     borderRadius: 5,
+    height: 40,
+    justifyContent: "center",
 },
 text: {
     padding: 5,
+    color: AppColors.white,
 }
 });
