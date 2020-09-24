@@ -6,8 +6,9 @@ import {
     View,
 } from 'react-native';
 import CitasList from '../components/CitasList';
-import {getCitasByOperario} from '../data/Citas';
 import {constantes} from '../data/constantes';
+import FAB from '../components/FAB';
+import {getColors as AppColors} from '../styles/colors';
 
 export default class HistorialCompleto extends Component {
     constructor(props) {
@@ -19,7 +20,6 @@ export default class HistorialCompleto extends Component {
     }
 
     componentDidMount = () => {
-        console.log(this.state.operario.id);
         fetch("http://"+constantes.ip+":8080/itvApp/getCitaByOperario", {
             method: "POST",
             headers: {
@@ -37,6 +37,22 @@ export default class HistorialCompleto extends Component {
 
     onPressItem = (param) => {
         this.props.navigation.navigate('Datos', {cita: param, operario: this.state.operario})
+    }
+
+    handleRefresh = () => {
+        fetch("http://"+constantes.ip+":8080/itvApp/getCitaByOperario", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:  JSON.stringify(this.state.operario.id),
+        }).then(response => {  
+                return response.json();   
+        }).then(data => { 
+            console.log(data);
+            this.setState({citas: data})
+        });
     }
 
     comprobarITV = () => {
@@ -57,6 +73,12 @@ export default class HistorialCompleto extends Component {
         return (
         <SafeAreaView style={styles.container}>
             {this.comprobarITV()}
+            <FAB
+                icon="ios-refresh"
+                fabStyle={{backgroundColor: AppColors.buttonLogin}}
+                textStyle={{color: AppColors.black}}
+                onPress={this.handleRefresh}
+            />
         </SafeAreaView>
         );
     }

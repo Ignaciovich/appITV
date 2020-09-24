@@ -33,8 +33,6 @@ export default class DatosCita extends Component {
         }).then(function(response){  
             return response.json();   
         }).then(data => { 
-            console.log("Aqui despues debería ir el usuario")
-            console.log(data)
             if (data.id){
                 this.setState({usuario: data})
             }else{
@@ -56,15 +54,9 @@ export default class DatosCita extends Component {
         }).then(function(response){  
             return response.json();   
         }).then(data => { 
-            console.log("Aqui debajo iria el coche")
-            console.log(data)
-            if (data.matricula){
-                this.setState({coche: data})
-            }else{
-                ToastAndroid.show("Usuario o contraseña erróneos.", ToastAndroid.SHORT);
-            }
+            this.setState({coche: data});
         });
-        console.log(this.state.operario);
+
         fetch("http://"+constantes.ip+":8080/itvApp/getEstacionById", {
             method: "POST",
             headers: {
@@ -75,16 +67,9 @@ export default class DatosCita extends Component {
         }).then(function(response){  
             return response.json();   
         }).then(data => { 
-            console.log("Aqui iria la estacion")
-            console.log(data)
-            if (data.id){
-                this.setState({estacion: data})
-            }else{
-                ToastAndroid.show("Usuario o contraseña erróneos.", ToastAndroid.SHORT);
-            }
+            this.setState({estacion: data})
         });
     }
-    
 
     cargarresultado = () => {
         if (this.state.cita.resultado == 0){
@@ -115,7 +100,7 @@ export default class DatosCita extends Component {
                         <Text style={styles.text}>{this.state.cita.observaciones}</Text>
                     </View>
                     <TouchableOpacity style={styles.buttonContainer} onPress={this.mandarCorreo}>
-                        <Text style={styles.buttonText}>MANDAR POR CORREO</Text>
+                        <Text style={styles.buttonText}>MANDAR CORREO</Text>
                     </TouchableOpacity>
                 </View>
             );
@@ -123,7 +108,8 @@ export default class DatosCita extends Component {
     }
 
     mandarCorreo = () => {
-        Communications.email([this.state.email], null, null, "Informe ITV", cita);
+        console.log(this.state.email)
+        Communications.email([this.state.usuario.email], null, null, "Información sobre ITV", "Ya dispone del resultado de su ITV para el coche "+ this.state.cita.matricula+ " del dia "+ this.state.cita.fecha + " a las " + this.state.cita.hora);
     }
 
     render() {

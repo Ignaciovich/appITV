@@ -58,16 +58,13 @@ export default class Signup extends Component{
                                 'Content-Type': 'application/json'
                             }, 
                             body:  JSON.stringify(operario),
-                            }).then(function(response){  
-                                return response.json();   
-                            }).then(function(data){ 
-                                console.log(data)
-                                if (!data.status){
-                                    ToastAndroid.show("Operario registrado con éxito.", ToastAndroid.SHORT);
-                                    this.props.navigation.goBack();
-                                }else{
+                            }).then(response => {  
+                                if (response.status != 200){
                                     ToastAndroid.show("Ya existe un operario con ese correo.", ToastAndroid.SHORT);
                                 }
+                            }).then(data => { 
+                                ToastAndroid.show("Operario registrado con éxito.", ToastAndroid.SHORT);
+                                this.props.navigation.goBack();
                             });
                             
                         }else{

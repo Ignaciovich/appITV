@@ -44,14 +44,14 @@ export default class Login extends Component {
             },
             body:  JSON.stringify(user),
             })
-            .then(response => {  
-                return response.json();   
+            .then(response => {
+                return response.json();
             })
-            .then(data => { 
+            .then(data => {
                 if (data.id){
-                    this.props.navigation.navigate('Main', {"operario": data})
+                    this.props.navigation.navigate('Main', {"operario": data});
                 }else{
-                    ToastAndroid.show("Usuario o contraseña erróneos.", ToastAndroid.SHORT);
+                    ToastAndroid.show("Usuario o contraseña incorrectos.", ToastAndroid.SHORT);
                 }
             });
         }else{

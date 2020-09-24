@@ -1,0 +1,25 @@
+Requisitos para poder ejecutar la aplicación:
+
+- Tener instalado NodeJs -> https://nodejs.org/en/
+- Ejecutar el siguiente comando en el terminal -> npm install expo-cli --global
+- Se recomienda usar VS Code como entorno para ejecutar la aplicación. En el caso de no tenerlo se puede descargar desde aquí -> https://code.visualstudio.com/docs/?dv=win
+- Se recomienda instalar también la siguiente extensión -> https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native
+- Para poder ejecutar la aplicación solamente hay que abrir un terminal, moverte hasta el directorio del programa y escribir el siguiente comando -> expo start
+- Desde el móvil será necesario instalar la aplicación Expo.
+- Una vez se ejecute, en el navegador se abrirá una página en local con un código QR. Teniendo el móvil conectado a la misma red que el ordenador habrá que escanear el código QR desde
+la aplicación Expo.
+
+A continuación se mostrarán las librerías utilizadas. Todas y cada una de ellas se instalan abriendo un terminal y ejecutando los comandos en la carpeta del proyecto.
+
+- React Native Navigation: es la librería oficial necesaria para poder navegar entre pantallas. Comandos que se han usado:
+    · npm install @react-navigation/native
+    · expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+    · npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+    · npm install @react-navigation/stack
+    · npm install @react-navigation/bottom-tabs
+- BarCode Scanner: es la librería que se ha elegido para poder realizar la lectura de códigos QR. Comando que se ha usado:
+    · expo install expo-barcode-scanner
+- React Native Communications: esta librería es la que hace posible poder enviar correos. Comando que se ha usado:
+    · npm install react-native-communications
+- Permissions: librería que me permitía acceder a los permisos garantizados y denegados y poder cambiar su estado segun guste el usuario. Comando que se ha usado:
+    · expo install expo-permissions

@@ -6,7 +6,9 @@ import {
     View,
 } from 'react-native';
 import CitasList from '../components/CitasList';
+import FAB from '../components/FAB';
 import {constantes} from '../data/constantes';
+import {getColors as AppColors} from '../styles/colors';
 
 export default class HistorialHoy extends Component {
     constructor(props) {
@@ -23,7 +25,6 @@ export default class HistorialHoy extends Component {
         const cita = {
             "fecha": fecha,
         }
-        console.log(fecha);
         fetch("http://"+constantes.ip+":8080/itvApp/getCitaByFecha", {
             method: "POST",
             headers: {
@@ -34,13 +35,32 @@ export default class HistorialHoy extends Component {
         }).then(response => {  
                 return response.json();   
         }).then(data => { 
-            console.log(data);
             this.setState({citas: data})
         });
     }
 
     onPressItem = (param) => {
         this.props.navigation.navigate('Datos', {cita: param, operario: this.state.operario})
+    }
+
+    handleRefresh = () => {
+        const {fecha, operario} = this.state;
+        const cita = {
+            "fecha": fecha,
+            "estacion": operario.estacion,
+        }
+        fetch("http://"+constantes.ip+":8080/itvApp/getCitaByFecha", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:  JSON.stringify(cita),
+        }).then(response => {  
+                return response.json();   
+        }).then(data => { 
+            this.setState({citas: data})
+        });
     }
 
     comprobarITV = () => {
@@ -61,6 +81,12 @@ export default class HistorialHoy extends Component {
         return (
         <SafeAreaView style={styles.container}>
             {this.comprobarITV()}
+            <FAB
+                icon="ios-refresh"
+                fabStyle={{backgroundColor: AppColors.buttonLogin}}
+                textStyle={{color: AppColors.black}}
+                onPress={this.handleRefresh}
+            />
         </SafeAreaView>
         );
     }
