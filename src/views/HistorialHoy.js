@@ -21,7 +21,7 @@ export default class HistorialHoy extends Component {
     }
 
     componentDidMount = () => {
-        const {fecha} = this.state;
+        const {fecha, operario} = this.state;
         const cita = {
             "fecha": fecha,
             "estacion": operario.estacion,
